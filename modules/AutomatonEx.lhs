@@ -35,6 +35,7 @@ $M_p$ & $M_1$ \\
 \includegraphics[scale=0.6]{fig/figm1.pdf} 
 \end{tabular}
 \end{center}
+
 \begin{screen}
 \begin{verbatim}
 *AutomatonEx> take 10 $ Automaton.language mp
