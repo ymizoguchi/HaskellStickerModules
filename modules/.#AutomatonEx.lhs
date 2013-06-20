@@ -1,1 +1,0 @@
-ym@sumire.l.math.kyushu-u.ac.jp.78072
