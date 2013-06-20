@@ -1,0 +1,76 @@
+The sticker system is a formal DNA computing model introduced by 
+\cite{kari1998,paun1998}.
+The sticker operation used in the sticker system  is the most 
+basic and essential operation based on using Watson-Click 
+complementarity and sticky ends.
+
+In this paper, we introduce Haskell program modules for realize 
+and analyse features related to the sticker system.
+Most of realized operations and constructions are based on
+the facts in \cite{paun1998}, but we modify the expression of
+domino and sticker operations for realizing Haskell functions.
+
+We modify the definition of domino ($D$) from a string of pairs
+of alphabet to a triple $(l,r,x)$ of two string $l$, $r$
+and an integer $x$.
+For example 
+$\left(\begin{array}{c} \lambda \\ C \end{array}\right)$
+$\left[\begin{array}{c} AT \\ TA \end{array}\right]$
+$\left(\begin{array}{c} GC \\ \lambda \end{array}\right)$
+is represented by $(ATGC,CTA,-1)$.
+According to this modification, the sticker operation 
+$\mu:D \times D \to D \cup \{\bot\}$ is reformed to
+one equation 
+$\mu((l_1,r_1,x_1),(l_2,r_2,x_2)) =(l_1l_2,r_1r_2,x_1)$,
+if $(l_1l_2,r_1r_2,x)\in D$ and 
+$x_1+ length(r_1)-length(l_1) = x_2$.
+Using this simple representation of domino and sticker operations,
+we implement them in Haskell.
+
+One of the benefits of using Haskell language 
+is it has descriptions for infinite set of strings 
+using lazy evaluation schemes.
+For example, the infinite set $\{a,b\}^*$ is 
+denoted by finite length of expression \verb|(sstar ['a','b'])|.
+Using \verb|(take)| function to view contents of an infinite set
+(e.g. \verb|(take 5 (sstar ['a','b']))| is \verb|["","a","b","aa","ba"]|).
+Further using set theoretical notions in Haskell, we can easily
+realize the definitions of various kinds of set of domino.
+For example, to make a sticker system which generate the equivalent 
+language of a finite automaton we need an atom set
+$$
+A_2 = \bigcup_{i=1}^{k+1} 
+\{(xu,x,0)|x\in \Sigma^{\le (k+2-i)}, u\in \Sigma^i,
+\delta^*(0,xu)=i-1 \}.
+$$
+In Haskell notations, we have following function definitions.
+{\small
+\begin{quote}
+\begin{verbatim}
+aA2::Automaton->[Domino]
+aA2 m@(q,s,d,q0,f) = concat [(aA2' m i)| i<- [1..(k+1)]] where k = (length q)-1
+aA2'::Automaton->Int->[Domino]
+aA2' m@(q,s,d,q0,f) i =  [(x++u,x,0)| (x,u) <- xupair, (dstar d 0 (x++u)) ==(i-1)]
+       where xupair = [(x,u)|x<-(sigmann s (k+2-i)), u<-(sigman s i)]
+             k = (length q)-1
+\end{verbatim}
+\end{quote}
+}
+
+The modules is composed of 4 parts,
+{\bf Automaton} module
+(string, automaton and their languages),
+{\bf Sticker} module
+(domino, sticker system and their languages),
+{\bf Grammar} module
+(context-free grammar, linear-grammar and their languages),
+and {\bf \LaTeX} output module
+(pretty printing for domino).
+Using our module functions, we can easily define finite automata
+and linear grammars and construct sticker systems which have the
+same power of finite automata and linear grammars
+introduced in \cite{paun1998}.
+
+In this paper, we introduce implemented module functions and
+examples of sticker systems with equivalent power of 
+concrete finite automata and linear grammars.

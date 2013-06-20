@@ -1,0 +1,69 @@
+\documentclass{article}
+
+%include lhs2TeX.fmt
+%include lhs2TeX.sty
+%include WKlhs.sty
+
+\addtolength{\textwidth}{3cm}
+\addtolength{\textheight}{3cm}
+\addtolength{\topmargin}{-2cm}
+\addtolength{\oddsidemargin}{-2cm}
+\addtolength{\evensidemargin}{-2cm}
+
+\usepackage{verbatim,graphicx,bxascmac}
+
+\newenvironment{code}{\small\verbatim}{\endverbatim\normalsize}
+\newcommand{\qed}{\hbox{\rule{6pt}{6pt}}}
+
+\newtheorem{example}{{\bf Example}}
+\newtheorem{definition}{{\bf Definition}}
+\newtheorem{theorem}{{\bf Theorem}}
+
+\pagestyle{headings}
+% \markright{Y.Mizoguchi (\today)}
+
+\begin{document}
+
+\title{Haskell Modules for Sticker Systems (Ver.1)}
+
+\author{Yoshihiro MIZOGUCHI\\
+Institute of Mathematics for Industry, Kyushu University, JAPAN.}
+\date{}
+
+\maketitle
+
+\tableofcontents
+
+\section{Introduction}
+\input{abstract.tex}
+
+\section{Automaton Module}
+\input{modules/Automaton.lhs}
+\input{modules/AutomatonEx.lhs}
+
+\section{Sticker Module}
+\input{modules/Sticker.lhs}
+\input{modules/StickerEx1.lhs}
+
+
+\section{Grammar Module}
+\input{modules/Grammar.lhs}
+\input{modules/GrammarEx.lhs}
+\input{modules/StickerEx2.lhs}
+
+\section{\LaTeX Output Module}
+\input{modules/OutputEx.lhs}
+
+
+
+\begin{thebibliography}{99}
+\bibitem{alhazov2005}A.Alhazov,M.Cavaliere, Computing by Observing Bio-systems:The Case of Sticker Systems,LNCS 3384,2005: 1-13,Proc.DNA10
+\bibitem{kari1998}L.Kari, G.Paun, G.Rozenberg, A.Salomaa,S.Yu,DNA computing, sticker systems, and universality,Acta Informatica 35,1998: 401-420
+\bibitem{sakakibara2001}Y.Sakakibara,S.Kobayashi, Sticker systems with complex structures, Soft Computing 5 2001: 114-120
+\bibitem{paun1998}G.Paun,G.Rozenberg, Sticker systems, Theoretical
+	Computer Science 204,1998: 183-203
+\bibitem{kissani2009}K.K.K.R.Perera, Y.Mizoguchi,
+Imprementation of Haskell Modules for Automata ans Sticker Systems,
+Journal of Math-for-industory, 1,2009A-7: 51-56.
+\end{thebibliography}
+\end{document}
